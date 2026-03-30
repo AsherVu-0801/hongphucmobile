@@ -62,7 +62,7 @@
 
         <!-- MAIN -->
         <main class="flex-1">
-            <!-- ADMIN PANEL (Kéo Thả Ảnh) -->
+            <!-- ADMIN PANEL -->
             <section id="admin-panel" class="hidden bg-white p-6 rounded-3xl shadow-xl border-2 border-emerald-500 mb-8 overflow-hidden">
                 <h3 class="font-bold text-xl mb-4 text-emerald-700 flex items-center gap-2">
                     <i class="fas fa-plus-circle"></i> THÊM HÀNG MỚI VỀ
@@ -71,11 +71,17 @@
                     <div class="space-y-4">
                         <input id="p-name" type="text" placeholder="Tên sản phẩm..." class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-emerald-400">
                         <input id="p-price" type="text" placeholder="Giá bán (VD: 15.990.000đ)" class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-emerald-400">
-                        <select id="p-category" class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none">
-                            <option value="phone">📱 Điện thoại</option>
-                            <option value="accessory">🎧 Phụ kiện</option>
-                            <option value="repair">🔧 Sửa chữa</option>
-                        </select>
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="p-category" class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none">
+                                <option value="phone">📱 Điện thoại</option>
+                                <option value="accessory">🎧 Phụ kiện</option>
+                                <option value="repair">🔧 Sửa chữa</option>
+                            </select>
+                            <select id="p-status" class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none font-bold text-emerald-600">
+                                <option value="new">Mới 100%</option>
+                                <option value="used">Đã qua sử dụng</option>
+                            </select>
+                        </div>
                     </div>
                     
                     <div id="drop-zone" class="relative border-4 border-dashed border-emerald-100 rounded-3xl flex flex-col items-center justify-center p-6 hover:bg-emerald-50 transition cursor-pointer group">
