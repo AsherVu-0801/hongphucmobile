@@ -3,65 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HỒNG PHÚC Mobile - Phan Rí Cửa</title>
+    <title>HỒNG PHÚC Mobile - Hoàng Hà Style</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary-green: #10b981; }
-        .bg-brand { background-color: var(--primary-green); }
-        .text-brand { color: var(--primary-green); }
+        :root { --main-blue: #00483d; --sub-green: #00b14f; }
+        .bg-hoangha { background: var(--main-blue); }
+        .text-hoangha { color: var(--sub-green); }
+        .sidebar-item:hover { background: #f0fdf4; color: var(--sub-green); }
+        .active-cate { background: #00b14f !important; color: white !important; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100 font-sans">
     <!-- Header -->
-    <header class="bg-brand text-white p-4 shadow-md sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand font-bold text-xl">HP</div>
-                <h1 class="text-xl font-bold uppercase tracking-tight">HỒNG PHÚC Mobile</h1>
+    <header class="bg-hoangha text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="text-2xl font-black tracking-tighter">HONGPHUC<span class="text-green-400">MOBILE</span></div>
+                <div class="hidden md:flex bg-white/10 rounded-full px-4 py-1 text-sm items-center gap-2">
+                    <i class="fas fa-phone-alt"></i> 0949.397.344
+                </div>
             </div>
-            <button id="btn-toggle-admin" class="hidden bg-white text-brand px-4 py-1.5 rounded-lg font-bold text-sm shadow-sm">Admin Mode</button>
+            <button id="btn-toggle-admin" class="hidden bg-yellow-400 text-black px-4 py-1.5 rounded-full font-bold text-xs uppercase shadow-lg hover:scale-105 transition">Admin Control</button>
         </div>
     </header>
 
-    <!-- Biển hiệu -->
-    <section class="bg-white py-12 border-b">
-        <div class="container mx-auto text-center px-4">
-            <h2 class="text-3xl font-black text-gray-800 tracking-tighter">ĐIỆN THOẠI - PHỤ KIỆN</h2>
-            <p class="text-brand font-bold italic text-lg mt-1">SỬA CHỮA - ÉP KÍNH</p>
-            <div class="mt-4 flex items-center justify-center gap-2 text-gray-500">
-                <span class="text-xl">📍</span>
-                <p class="font-medium text-sm md:text-base">29 Quang Trung, Phan Rí Cửa</p>
+    <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+        <!-- SIDEBAR DANH MỤC -->
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200">
+                <div class="bg-gray-50 px-4 py-3 font-bold text-gray-700 border-b">DANH MỤC</div>
+                <nav id="category-menu">
+                    <button onclick="filterCate('all')" class="cate-btn active-cate w-full flex items-center gap-3 px-4 py-3 text-sm font-medium sidebar-item transition border-b">
+                        <i class="fas fa-th-large w-5"></i> Tất cả sản phẩm
+                    </button>
+                    <button onclick="filterCate('phone')" class="cate-btn w-full flex items-center gap-3 px-4 py-3 text-sm font-medium sidebar-item transition border-b">
+                        <i class="fas fa-mobile-alt w-5"></i> Điện thoại
+                    </button>
+                    <button onclick="filterCate('accessory')" class="cate-btn w-full flex items-center gap-3 px-4 py-3 text-sm font-medium sidebar-item transition border-b">
+                        <i class="fas fa-headphones w-5"></i> Phụ kiện / Sạc
+                    </button>
+                    <button onclick="filterCate('repair')" class="cate-btn w-full flex items-center gap-3 px-4 py-3 text-sm font-medium sidebar-item transition">
+                        <i class="fas fa-tools w-5"></i> Sửa chữa / Ép kính
+                    </button>
+                </nav>
             </div>
-        </div>
-    </section>
+        </aside>
 
-    <!-- Admin Panel -->
-    <section id="admin-panel" class="hidden container mx-auto mt-8 p-6 bg-emerald-50 border-2 border-dashed border-emerald-300 rounded-2xl mx-4">
-        <h3 class="font-bold text-emerald-800 mb-4 flex items-center gap-2">✨ Thêm Sản Phẩm Mới</h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <input id="p-name" type="text" placeholder="Tên điện thoại/phụ kiện" class="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-400">
-            <input id="p-price" type="text" placeholder="Giá (VD: 15.000.000đ)" class="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-400">
-            <input id="p-img" type="text" placeholder="Link ảnh sản phẩm" class="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-400">
-            <button id="btn-add-product" class="bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-xl font-bold shadow-lg transition-all">LƯU LÊN CLOUD</button>
-        </div>
-    </section>
+        <!-- MAIN CONTENT -->
+        <main class="flex-1">
+            <!-- ADMIN PANEL (Nâng cấp) -->
+            <section id="admin-panel" class="hidden bg-white p-6 rounded-2xl shadow-md border-2 border-green-500 mb-8 animate-pulse">
+                <h3 class="font-bold text-xl mb-4">🆕 THÊM HÀNG MỚI VỀ</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <input id="p-name" type="text" placeholder="Tên sản phẩm..." class="p-3 border rounded-xl outline-none focus:border-green-500">
+                    <input id="p-price" type="text" placeholder="Giá bán (VD: 15.990.000đ)" class="p-3 border rounded-xl outline-none">
+                    <select id="p-category" class="p-3 border rounded-xl outline-none">
+                        <option value="phone">📱 Điện thoại</option>
+                        <option value="accessory">🎧 Phụ kiện</option>
+                        <option value="repair">🔧 Dịch vụ sửa chữa</option>
+                    </select>
+                    <div class="relative group">
+                        <input type="file" id="p-file" class="hidden" accept="image/*">
+                        <label for="p-file" class="flex items-center justify-center p-3 border-2 border-dashed border-green-400 rounded-xl cursor-pointer hover:bg-green-50 transition text-sm font-bold text-green-700">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i> CHỌN ẢNH TỪ MÁY
+                        </label>
+                        <div id="file-status" class="text-[10px] text-center mt-1 text-gray-400">Chưa chọn ảnh</div>
+                    </div>
+                </div>
+                <button id="btn-add-product" class="w-full mt-4 bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-700 transition uppercase tracking-widest">Đăng bán ngay</button>
+            </section>
 
-    <!-- Danh sách sản phẩm -->
-    <main class="container mx-auto py-12 px-4 min-h-[400px]">
-        <div id="product-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            <!-- Sản phẩm load từ Firebase -->
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-10 mt-20">
-        <div class="container mx-auto text-center px-4">
-            <p class="font-black text-2xl tracking-widest mb-2">HỒNG PHÚC Mobile</p>
-            <p class="text-emerald-400 font-bold mb-4">0949.397.344 - 0937.31.44.33</p>
-            <div class="h-px bg-slate-700 w-24 mx-auto mb-4"></div>
-            <p class="text-slate-500 text-xs">© 2026 Developed by Phuc Vu (UIT)</p>
-        </div>
-    </footer>
+            <!-- PRODUCT GRID -->
+            <div id="product-list" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Data từ Firebase sẽ đổ vào đây -->
+            </div>
+        </main>
+    </div>
 
     <script type="module" src="hp-config.js"></script>
 </body>
