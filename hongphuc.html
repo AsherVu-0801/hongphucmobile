@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỒNG PHÚC Mobile - Phan Rí Cửa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --primary-green: #10b981; }
+        .bg-brand { background-color: var(--primary-green); }
+        .text-brand { color: var(--primary-green); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-brand text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand font-bold text-xl">HP</div>
+                <h1 class="text-xl font-bold uppercase tracking-tight">HỒNG PHÚC Mobile</h1>
+            </div>
+            <button id="btn-toggle-admin" class="hidden bg-white text-brand px-4 py-1.5 rounded-lg font-bold text-sm shadow-sm">Admin Mode</button>
+        </div>
+    </header>
+
+    <!-- Biển hiệu -->
+    <section class="bg-white py-12 border-b">
+        <div class="container mx-auto text-center px-4">
+            <h2 class="text-3xl font-black text-gray-800 tracking-tighter">ĐIỆN THOẠI - PHỤ KIỆN</h2>
+            <p class="text-brand font-bold italic text-lg mt-1">SỬA CHỮA - ÉP KÍNH</p>
+            <div class="mt-4 flex items-center justify-center gap-2 text-gray-500">
+                <span class="text-xl">📍</span>
+                <p class="font-medium text-sm md:text-base">29 Quang Trung, Phan Rí Cửa</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin-panel" class="hidden container mx-auto mt-8 p-6 bg-emerald-50 border-2 border-dashed border-emerald-300 rounded-2xl mx-4">
+        <h3 class="font-bold text-emerald-800 mb-4 flex items-center gap-2">✨ Thêm Sản Phẩm Mới</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input id="p-name" type="text" placeholder="Tên điện thoại/phụ kiện" class="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-400">
+            <input id="p-price" type="text" placeholder="Giá (VD: 15.000.000đ)" class="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-400">
+            <input id="p-img" type="text" placeholder="Link ảnh sản phẩm" class="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-400">
+            <button id="btn-add-product" class="bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-xl font-bold shadow-lg transition-all">LƯU LÊN CLOUD</button>
+        </div>
+    </section>
+
+    <!-- Danh sách sản phẩm -->
+    <main class="container mx-auto py-12 px-4 min-h-[400px]">
+        <div id="product-list" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <!-- Sản phẩm load từ Firebase -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-10 mt-20">
+        <div class="container mx-auto text-center px-4">
+            <p class="font-black text-2xl tracking-widest mb-2">HỒNG PHÚC Mobile</p>
+            <p class="text-emerald-400 font-bold mb-4">0949.397.344 - 0937.31.44.33</p>
+            <div class="h-px bg-slate-700 w-24 mx-auto mb-4"></div>
+            <p class="text-slate-500 text-xs">© 2026 Developed by Phuc Vu (UIT)</p>
+        </div>
+    </footer>
+
+    <script type="module" src="hp-config.js"></script>
+</body>
+</html>

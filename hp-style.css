@@ -1,0 +1,8 @@
+/* hp-style.css */
+.font-brand {
+    font-family: 'Inter', sans-serif;
+}
+
+.card-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
