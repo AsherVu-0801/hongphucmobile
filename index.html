@@ -13,6 +13,7 @@
         .sidebar-item:hover { background: #f0fdf4; color: var(--sub-green); }
         .active-cate { background: #00b14f !important; color: white !important; }
         .logo-img { height: 60px; width: auto; object-fit: contain; }
+        #drop-zone.dragover { background-color: #ecfdf5; border-color: #10b981; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen">
@@ -21,30 +22,26 @@
     <header class="bg-hoangha text-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-2 flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <!-- Chỗ này nhúng logo của m nè -->
                 <img src="logo_hp.png" alt="HỒNG PHÚC Mobile" class="logo-img">
-                
-                <div class="hidden md:flex bg-white/10 rounded-full px-4 py-1 text-sm items-center gap-2">
-                    <i class="fas fa-phone-alt"></i> 0949.397.344
+                <div class="hidden md:flex bg-white/10 rounded-full px-4 py-1 text-sm items-center gap-2 font-bold">
+                    <i class="fas fa-phone-alt text-green-400"></i> 0949.397.344
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <!-- Icon Facebook dẫn thẳng tới link m yêu cầu -->
-                <a href="https://www.facebook.com/share/1DLDWmbo84/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-2 bg-[#1877F2] px-3 py-1.5 rounded-lg font-bold text-xs hover:scale-105 transition">
+                <a href="https://www.facebook.com/share/1DLDWmbo84/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-2 bg-[#1877F2] px-3 py-1.5 rounded-lg font-bold text-xs hover:scale-105 transition shadow-lg">
                     <i class="fab fa-facebook-f text-lg"></i>
-                    <span class="hidden sm:inline">FACEBOOK</span>
+                    <span class="hidden sm:inline uppercase">Facebook</span>
                 </a>
                 <button id="btn-toggle-admin" class="hidden bg-yellow-400 text-black px-4 py-1.5 rounded-full font-bold text-xs uppercase shadow-lg hover:scale-105 transition">Admin Control</button>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
     <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6 flex-grow">
-        <!-- SIDEBAR DANH MỤC -->
+        <!-- SIDEBAR -->
         <aside class="w-full md:w-64 flex-shrink-0">
-            <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200">
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200 sticky top-24">
                 <div class="bg-gray-50 px-4 py-3 font-bold text-gray-700 border-b italic uppercase text-xs tracking-widest">Danh mục cửa hàng</div>
                 <nav id="category-menu">
                     <button onclick="filterCate('all')" class="cate-btn active-cate w-full flex items-center gap-3 px-4 py-3 text-sm font-medium sidebar-item transition border-b">
@@ -63,43 +60,49 @@
             </div>
         </aside>
 
-        <!-- MAIN CONTENT -->
+        <!-- MAIN -->
         <main class="flex-1">
-            <!-- ADMIN PANEL -->
-            <section id="admin-panel" class="hidden bg-white p-6 rounded-2xl shadow-md border-2 border-green-500 mb-8 animate-pulse">
-                <h3 class="font-bold text-xl mb-4 text-green-700"><i class="fas fa-plus-circle"></i> THÊM HÀNG MỚI VỀ</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <input id="p-name" type="text" placeholder="Tên sản phẩm..." class="p-3 border rounded-xl outline-none focus:border-green-500">
-                    <input id="p-price" type="text" placeholder="Giá (VD: 15.990.000đ)" class="p-3 border rounded-xl outline-none">
-                    <select id="p-category" class="p-3 border rounded-xl outline-none">
-                        <option value="phone">📱 Điện thoại</option>
-                        <option value="accessory">🎧 Phụ kiện</option>
-                        <option value="repair">🔧 Sửa chữa</option>
-                    </select>
-                    <div class="relative group">
-                        <input type="file" id="p-file" class="hidden" accept="image/*">
-                        <label for="p-file" class="flex items-center justify-center p-3 border-2 border-dashed border-green-400 rounded-xl cursor-pointer hover:bg-green-50 transition text-sm font-bold text-green-700">
-                            <i class="fas fa-cloud-upload-alt mr-2"></i> CHỌN ẢNH MÁY
-                        </label>
-                        <div id="file-status" class="text-[10px] text-center mt-1 text-gray-400">Chưa chọn file</div>
+            <!-- ADMIN PANEL (Kéo Thả Ảnh) -->
+            <section id="admin-panel" class="hidden bg-white p-6 rounded-3xl shadow-xl border-2 border-emerald-500 mb-8 overflow-hidden">
+                <h3 class="font-bold text-xl mb-4 text-emerald-700 flex items-center gap-2">
+                    <i class="fas fa-plus-circle"></i> THÊM HÀNG MỚI VỀ
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <input id="p-name" type="text" placeholder="Tên sản phẩm..." class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-emerald-400">
+                        <input id="p-price" type="text" placeholder="Giá bán (VD: 15.990.000đ)" class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-emerald-400">
+                        <select id="p-category" class="w-full p-4 bg-gray-50 border-none rounded-2xl outline-none">
+                            <option value="phone">📱 Điện thoại</option>
+                            <option value="accessory">🎧 Phụ kiện</option>
+                            <option value="repair">🔧 Sửa chữa</option>
+                        </select>
+                    </div>
+                    
+                    <div id="drop-zone" class="relative border-4 border-dashed border-emerald-100 rounded-3xl flex flex-col items-center justify-center p-6 hover:bg-emerald-50 transition cursor-pointer group">
+                        <input type="file" id="p-file" class="absolute inset-0 opacity-0 cursor-pointer z-10" accept="image/*">
+                        <div id="preview-container" class="text-center group-hover:scale-110 transition">
+                            <i class="fas fa-images text-5xl text-emerald-200 mb-2"></i>
+                            <p class="text-sm font-black text-emerald-700 uppercase tracking-tighter">Kéo thả ảnh máy vào đây</p>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase mt-1">Hoặc bấm để chọn file</p>
+                        </div>
+                        <img id="img-preview" class="hidden absolute inset-0 w-full h-full object-cover rounded-2xl z-0">
                     </div>
                 </div>
-                <button id="btn-add-product" class="w-full mt-4 bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-700 transition uppercase tracking-widest">Đăng bán ngay</button>
+                <button id="btn-add-product" class="w-full mt-6 bg-emerald-600 text-white font-black py-4 rounded-2xl shadow-lg hover:bg-emerald-700 transition uppercase tracking-widest active:scale-95">Đăng bán ngay</button>
             </section>
 
             <!-- PRODUCT GRID -->
-            <div id="product-list" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                <!-- Dữ liệu load ở đây -->
-            </div>
+            <div id="product-list" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
         </main>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white border-t py-8 mt-10">
+    <footer class="bg-white border-t py-10 mt-10">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400 text-xs font-bold uppercase tracking-[0.3em]">HỒNG PHÚC Mobile Phan Rí Cửa</p>
-            <div class="h-px bg-gray-100 w-24 mx-auto my-4"></div>
-            <p class="text-gray-500 text-[10px] font-medium italic">© 2026 Developed by AsherVu (UIT)</p>
+            <h4 class="text-slate-800 font-black text-lg uppercase tracking-tighter">Hồng Phúc Mobile</h4>
+            <p class="text-gray-500 text-sm font-medium mt-1">29 Quang Trung, Xã Phan Rí Cửa, Lâm Đồng</p>
+            <div class="h-px bg-gray-100 w-24 mx-auto my-6"></div>
+            <p class="text-gray-400 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 Developed by AsherVu (UIT)</p>
         </div>
     </footer>
 
