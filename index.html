@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HỒNG PHÚC Mobile </title>
+    <title>HỒNG PHÚC Mobile - Phan Rí Cửa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -12,27 +12,40 @@
         .text-hoangha { color: var(--sub-green); }
         .sidebar-item:hover { background: #f0fdf4; color: var(--sub-green); }
         .active-cate { background: #00b14f !important; color: white !important; }
+        .logo-img { height: 60px; width: auto; object-fit: contain; }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+
     <!-- Header -->
     <header class="bg-hoangha text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <div class="text-2xl font-black tracking-tighter">HONGPHUC<span class="text-green-400">MOBILE</span></div>
+                <!-- Chỗ này nhúng logo của m nè -->
+                <img src="logo_hp.png" alt="HỒNG PHÚC Mobile" class="logo-img">
+                
                 <div class="hidden md:flex bg-white/10 rounded-full px-4 py-1 text-sm items-center gap-2">
                     <i class="fas fa-phone-alt"></i> 0949.397.344
                 </div>
             </div>
-            <button id="btn-toggle-admin" class="hidden bg-yellow-400 text-black px-4 py-1.5 rounded-full font-bold text-xs uppercase shadow-lg hover:scale-105 transition">Admin Control</button>
+
+            <div class="flex items-center gap-4">
+                <!-- Icon Facebook dẫn thẳng tới link m yêu cầu -->
+                <a href="https://www.facebook.com/share/1DLDWmbo84/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-2 bg-[#1877F2] px-3 py-1.5 rounded-lg font-bold text-xs hover:scale-105 transition">
+                    <i class="fab fa-facebook-f text-lg"></i>
+                    <span class="hidden sm:inline">FACEBOOK</span>
+                </a>
+                <button id="btn-toggle-admin" class="hidden bg-yellow-400 text-black px-4 py-1.5 rounded-full font-bold text-xs uppercase shadow-lg hover:scale-105 transition">Admin Control</button>
+            </div>
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6 flex-grow">
         <!-- SIDEBAR DANH MỤC -->
         <aside class="w-full md:w-64 flex-shrink-0">
             <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-200">
-                <div class="bg-gray-50 px-4 py-3 font-bold text-gray-700 border-b">DANH MỤC</div>
+                <div class="bg-gray-50 px-4 py-3 font-bold text-gray-700 border-b italic uppercase text-xs tracking-widest">Danh mục cửa hàng</div>
                 <nav id="category-menu">
                     <button onclick="filterCate('all')" class="cate-btn active-cate w-full flex items-center gap-3 px-4 py-3 text-sm font-medium sidebar-item transition border-b">
                         <i class="fas fa-th-large w-5"></i> Tất cả sản phẩm
@@ -52,23 +65,23 @@
 
         <!-- MAIN CONTENT -->
         <main class="flex-1">
-            <!-- ADMIN PANEL (Nâng cấp) -->
+            <!-- ADMIN PANEL -->
             <section id="admin-panel" class="hidden bg-white p-6 rounded-2xl shadow-md border-2 border-green-500 mb-8 animate-pulse">
-                <h3 class="font-bold text-xl mb-4">🆕 THÊM HÀNG MỚI VỀ</h3>
+                <h3 class="font-bold text-xl mb-4 text-green-700"><i class="fas fa-plus-circle"></i> THÊM HÀNG MỚI VỀ</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <input id="p-name" type="text" placeholder="Tên sản phẩm..." class="p-3 border rounded-xl outline-none focus:border-green-500">
-                    <input id="p-price" type="text" placeholder="Giá bán (VD: 15.990.000đ)" class="p-3 border rounded-xl outline-none">
+                    <input id="p-price" type="text" placeholder="Giá (VD: 15.990.000đ)" class="p-3 border rounded-xl outline-none">
                     <select id="p-category" class="p-3 border rounded-xl outline-none">
                         <option value="phone">📱 Điện thoại</option>
                         <option value="accessory">🎧 Phụ kiện</option>
-                        <option value="repair">🔧 Dịch vụ sửa chữa</option>
+                        <option value="repair">🔧 Sửa chữa</option>
                     </select>
                     <div class="relative group">
                         <input type="file" id="p-file" class="hidden" accept="image/*">
                         <label for="p-file" class="flex items-center justify-center p-3 border-2 border-dashed border-green-400 rounded-xl cursor-pointer hover:bg-green-50 transition text-sm font-bold text-green-700">
-                            <i class="fas fa-cloud-upload-alt mr-2"></i> CHỌN ẢNH TỪ MÁY
+                            <i class="fas fa-cloud-upload-alt mr-2"></i> CHỌN ẢNH MÁY
                         </label>
-                        <div id="file-status" class="text-[10px] text-center mt-1 text-gray-400">Chưa chọn ảnh</div>
+                        <div id="file-status" class="text-[10px] text-center mt-1 text-gray-400">Chưa chọn file</div>
                     </div>
                 </div>
                 <button id="btn-add-product" class="w-full mt-4 bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-700 transition uppercase tracking-widest">Đăng bán ngay</button>
@@ -76,10 +89,19 @@
 
             <!-- PRODUCT GRID -->
             <div id="product-list" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                <!-- Data từ Firebase sẽ đổ vào đây -->
+                <!-- Dữ liệu load ở đây -->
             </div>
         </main>
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-8 mt-10">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 text-xs font-bold uppercase tracking-[0.3em]">HỒNG PHÚC Mobile Phan Rí Cửa</p>
+            <div class="h-px bg-gray-100 w-24 mx-auto my-4"></div>
+            <p class="text-gray-500 text-[10px] font-medium italic">© 2026 Developed by AsherVu (UIT)</p>
+        </div>
+    </footer>
 
     <script type="module" src="hp-config.js"></script>
 </body>
